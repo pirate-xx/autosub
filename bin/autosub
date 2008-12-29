@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+
+require 'optiflag'
+require File.join(File.dirname(__FILE__), '..', 'lib', 'inspector')
+
+module AutoSub extend OptiFlagSet
+  flag "p" do
+    description "Directory path with many TV Shows directories"
+  end
+  optional_flag "lang" do
+    description "Language(s) you want for your subtitles, default: fr,en
+                  (Order is important to define if a srt is needed)"
+  end
+
+  and_process!
+end
+
+begin
+  inspector = Inspector.new(ARGV.flags.p, ARGV.flags.lang)
+rescue => e
+  p e.to_s
+  Inspector.growl("AutoSub Error!", 'look into the console log', 'failure.png')
+end
