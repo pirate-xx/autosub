@@ -61,7 +61,7 @@ private
   end
   
   def clean_dir(dir)
-    dir.select { |e| !["..", ".", ".DS_Store", ".com.apple.timemachine.supported", "Icon\r", "Icon?"].include?(e) }
+    dir.select { |e| !["..", ".", ".DS_Store", ".com.apple.timemachine.supported", "Icon\r"].include?(e) }
   end
 
   def lang_name(lang)
