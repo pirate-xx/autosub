@@ -69,14 +69,13 @@ private
   end
   
   def tv_show(episode)
-    name = episode.tv_show.gsub(/\s\([0-9]{4}\)/,'')
-    case name
+    case episode.tv_show
     when "Terminator The Sarah Connor Chronicles"
       "The Sarah Connor Chronicles"
     when "The IT Crowd"
       "IT Crowd"
     else
-      name
+      episode.tv_show
     end.downcase.gsub(/\s/, '_')
   end
   

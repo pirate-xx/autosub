@@ -6,7 +6,7 @@ class Episode
     @path = path
     @ext  = File.extname(@path)
     @name = File.basename(path, @ext)
-    @tv_show = tv_show
+    @tv_show = tv_show.gsub(/\s\([0-9]{4}\)/,'').chomp(' ')
     @srt = []
     
     search_existing_srt
