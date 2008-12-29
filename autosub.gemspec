@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{autosub}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pirate"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = %q{pirate.2061@gmail.com}
   s.executables = ["autosub"]
   s.extra_rdoc_files = ["bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "README.markdown"]
-  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Manifest", "Rakefile", "README.markdown"]
+  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Rakefile", "README.markdown", "Manifest"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/pirate/autosub}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Autosub", "--main", "README.markdown"]
