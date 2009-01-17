@@ -2,6 +2,7 @@ require 'simple-rss'
 require 'open-uri'
 require 'zip/zip'
 require 'cgi'
+require 'mechanize'
 
 # http://www.tvsubtitles.net/
 class TVSubtitle
@@ -30,18 +31,13 @@ class TVSubtitle
   end
   
 private
-
-  def srt_link(item)
-    id = item.link.match(/([0-9]+)/)[1]
-    http = Net::HTTP.new('www.tvsubtitles.net')
-    resp, data = http.get("/download-#{id}.html")
-    "http://www.tvsubtitles.net/#{resp.response['Location'].gsub(/\s/, '%20')}"
-  end
-
+  
   def download_srt(item, episode, lang)
-    url = srt_link(item)
+    agent = WWW::Mechanize.new
+    id = item_id(item)
     Tempfile.open("srt") do |tempfile|
-      tempfile.write(open(url).read) # download the srt
+      agent.get("http://www.tvsubtitles.net/subtitle-#{id}.html") # set cookie
+      tempfile.write(agent.get_file("http://www.tvsubtitles.net/download-#{id}.html")) # download the srt
       tempfile.close
       Zip::ZipFile.open(tempfile.path) do |zip_file|
         zip_file.each do |f|
@@ -65,6 +61,10 @@ private
 
   def item_title(item)
     "#{item.title} #{item.description.include?('720p') ? 'hd' : 'sd'}".downcase
+  end
+  
+  def item_id(item)
+    item.link.match(/([0-9]+)/)[1]
   end
   
 end
