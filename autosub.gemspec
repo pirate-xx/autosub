@@ -6,13 +6,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pirate"]
-  s.date = %q{2009-01-17}
+  s.date = %q{2009-02-10}
   s.default_executable = %q{autosub}
   s.description = %q{Ruby tool to automatically download subtitles (srt) inside your TV Shows folder}
   s.email = %q{pirate.2061@gmail.com}
   s.executables = ["autosub"]
   s.extra_rdoc_files = ["bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "README.markdown"]
-  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Rakefile", "README.markdown", "Manifest"]
+  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Manifest", "Rakefile", "README.markdown"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/pirate/autosub}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Autosub", "--main", "README.markdown"]
@@ -31,14 +31,12 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<optiflag>, [">= 0"])
       s.add_runtime_dependency(%q<simple-rss>, [">= 0"])
       s.add_runtime_dependency(%q<mechanize>, [">= 0"])
-      s.add_development_dependency(%q<echoe>, [">= 0"])
     else
       s.add_dependency(%q<hpricot>, [">= 0"])
       s.add_dependency(%q<rubyzip>, [">= 0"])
       s.add_dependency(%q<optiflag>, [">= 0"])
       s.add_dependency(%q<simple-rss>, [">= 0"])
       s.add_dependency(%q<mechanize>, [">= 0"])
-      s.add_dependency(%q<echoe>, [">= 0"])
     end
   else
     s.add_dependency(%q<hpricot>, [">= 0"])
@@ -46,6 +44,5 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<optiflag>, [">= 0"])
     s.add_dependency(%q<simple-rss>, [">= 0"])
     s.add_dependency(%q<mechanize>, [">= 0"])
-    s.add_dependency(%q<echoe>, [">= 0"])
   end
 end
