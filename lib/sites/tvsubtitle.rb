@@ -12,7 +12,7 @@ class TVSubtitle
     episodes = @inspector.episodes.select { |e| e.need_srt?(@inspector.langs) }
     
     $stdout.print "--------------------------------------------\n"
-    $stdout.print "Searching fot srt in www.tvsubtitles.net RSS\n"
+    $stdout.print "Searching for srt in www.tvsubtitles.net RSS\n"
     $stdout.print "--------------------------------------------\n"
     @inspector.langs.each do |l|
       rss(l).items.each do |item|

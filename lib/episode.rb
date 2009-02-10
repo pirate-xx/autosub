@@ -46,7 +46,7 @@ class Episode
   def good_format?(filename)
     case @format
     when 'hd'
-      filename.include?('720p')
+      filename.include?('720p') || filename.include?('720')
     when 'sd'
       !filename.include?('720p')
     end
