@@ -30,11 +30,6 @@ class Inspector
     
     # Find new srt
     begin
-      Podnapisi.new(self)
-    rescue => e
-      log.fatal "Problem with Podnapisi: #{e}"
-    end
-    begin
       TVSubtitle.new(self)
     rescue => e
       log.fatal "Problem with TVSubtitle: #{e}"
@@ -43,6 +38,11 @@ class Inspector
       SeriesSub.new(self)
     rescue => e
       log.fatal "Problem with SeriesSub: #{e}"
+    end
+    begin
+      Podnapisi.new(self)
+    rescue => e
+      log.fatal "Problem with Podnapisi: #{e}"
     end
   end
   

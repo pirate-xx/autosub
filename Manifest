@@ -1,0 +1,12 @@
+asset/failure.png
+asset/srt.png
+autosub.gemspec
+bin/autosub
+lib/episode.rb
+lib/inspector.rb
+lib/sites/podnapisi.rb
+lib/sites/seriessub.rb
+lib/sites/tvsubtitle.rb
+Manifest
+Rakefile
+README.markdown

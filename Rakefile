@@ -3,7 +3,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('autosub', '0.3') do |p|
+Echoe.new('autosub', '0.3.1') do |p|
   p.description    = "Ruby tool to automatically download subtitles (srt) inside your TV Shows folder"
   p.url            = "http://github.com/pirate/autosub"
   p.author         = "Pirate"
