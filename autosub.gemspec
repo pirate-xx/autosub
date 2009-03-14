@@ -6,13 +6,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Pirate"]
-  s.date = %q{2009-02-10}
+  s.date = %q{2009-03-15}
   s.default_executable = %q{autosub}
   s.description = %q{Ruby tool to automatically download subtitles (srt) inside your TV Shows folder}
   s.email = %q{pirate.2061@gmail.com}
   s.executables = ["autosub"]
-  s.extra_rdoc_files = ["bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "README.markdown"]
-  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Rakefile", "README.markdown", "Manifest"]
+  s.extra_rdoc_files = ["bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/podnapisi.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "README.markdown"]
+  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/podnapisi.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Manifest", "Rakefile", "README.markdown"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/pirate/autosub}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Autosub", "--main", "README.markdown"]

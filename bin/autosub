@@ -11,12 +11,15 @@ module AutoSub extend OptiFlagSet
     description "Language(s) you want for your subtitles, default: fr,en
                   (Order is important to define if a srt is needed)"
   end
+  optional_flag "log" do
+    description "path for log file"
+  end
 
   and_process!
 end
 
 begin
-  inspector = Inspector.new(ARGV.flags.p, ARGV.flags.lang)
+  inspector = Inspector.new(ARGV.flags.p, :lang => ARGV.flags.lang, :log_path => ARGV.flags.log)
 rescue => e
   p e.to_s
   Inspector.growl("AutoSub Error!", 'look into the console log', 'failure.png')
