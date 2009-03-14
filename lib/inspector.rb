@@ -3,6 +3,7 @@ require File.join(File.dirname(__FILE__), '..', 'lib', 'sites', 'seriessub')
 require File.join(File.dirname(__FILE__), '..', 'lib', 'sites', 'tvsubtitle')
 require File.join(File.dirname(__FILE__), '..', 'lib', 'sites', 'podnapisi')
 require 'logger'
+require "pathname"
 
 class Inspector
   
