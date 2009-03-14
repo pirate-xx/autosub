@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = %q{pirate.2061@gmail.com}
   s.executables = ["autosub"]
   s.extra_rdoc_files = ["bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/podnapisi.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "README.markdown"]
-  s.files = ["asset/failure.png", "asset/srt.png", "autosub.gemspec", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/podnapisi.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Manifest", "Rakefile", "README.markdown"]
+  s.files = ["asset/failure.png", "asset/srt.png", "bin/autosub", "lib/episode.rb", "lib/inspector.rb", "lib/sites/podnapisi.rb", "lib/sites/seriessub.rb", "lib/sites/tvsubtitle.rb", "Manifest", "Rakefile", "README.markdown", "autosub.gemspec"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/pirate/autosub}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Autosub", "--main", "README.markdown"]
