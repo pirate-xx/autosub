@@ -17,10 +17,11 @@ class TVSubtitle
     @inspector.langs.each do |l|
       rss(l).items.each do |item|
         episodes.each do |e|
-          unless e.srt.include?(l) 
+          unless e.srt.include?(l)
             if episode_title(e, l) == item_title(item)
-              $stdout.print "FOUND: #{e.episode_name_with_format} [#{l}]\n"
               download_srt(item, e, l)
+              inspector.log.info "#{e.episode_name_with_format} [#{l}] // TVSubtitle // #{@srt_name}"
+              $stdout.print "FOUND: #{e.episode_name_with_format} [#{l}]\n"
               e.srt << l
               @inspector.growl_episode(e, l)
             end
@@ -33,6 +34,7 @@ class TVSubtitle
 private
   
   def download_srt(item, episode, lang)
+    found = false
     agent = WWW::Mechanize.new
     id = item_id(item)
     Tempfile.open("srt") do |tempfile|
@@ -41,10 +43,19 @@ private
       tempfile.close
       Zip::ZipFile.open(tempfile.path) do |zip_file|
         zip_file.each do |f|
-          zip_file.extract(f, episode.srt_filename(lang))
+          if f.size > 5000
+            @srt_name = f.name
+            zip_file.extract(f, episode.srt_filename(lang))
+            found = true
+          end
         end
       end
     end
+  rescue => e
+    @inspector.log.fatal "TVSubtitle // #{episode.episode_name_with_format} [#{lang}] // #{e}"
+    found = false
+  else
+    found
   end
   
   def rss(lang)

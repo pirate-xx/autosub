@@ -1,15 +1,23 @@
 require File.join(File.dirname(__FILE__), '..', 'lib', 'episode')
 require File.join(File.dirname(__FILE__), '..', 'lib', 'sites', 'seriessub')
 require File.join(File.dirname(__FILE__), '..', 'lib', 'sites', 'tvsubtitle')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'sites', 'podnapisi')
+require 'logger'
 
 class Inspector
   
-  attr_accessor :tv_shows, :episodes, :langs
+  attr_accessor :tv_shows, :episodes, :langs, :log
   
-  def initialize(path , langs = nil)
-    @path = path.gsub(/\/$/,'')
-    @langs = langs ? langs.split(',') : ['fr','en']
-
+  def initialize(path , options = {})
+    @path = Pathname.new(path).realpath.to_s
+    @langs = options[:lang] ? options[:lang].split(',') : ['fr','en']
+    
+    # Initialize Logger
+    @log = Logger.new(options[:log_path] || "#{@path}/_autosub_.log" )
+    @log.datetime_format = "%Y-%m-%d %H:%M:%S "
+    log.info "Begin searching for '#{langs.join(',')}' subtitles..."
+    
+    $stdout.print "--- Searching for '#{langs.join(',')}' subtitles ---\n"
     @tv_shows = [] # {:name => ..., :path => ...}
     initialize_tv_shows
     $stdout.print "Found #{@tv_shows.size} TV Show(s) in #{@path}\n"
@@ -20,8 +28,21 @@ class Inspector
     $stdout.print "Found #{@episodes.select { |e| e.need_srt?(@langs) }.size} episode(s) who need(s) srt\n"
     
     # Find new srt
-    TVSubtitle.new(self)
-    SeriesSub.new(self)
+    begin
+      Podnapisi.new(self)
+    rescue => e
+      log.fatal "Problem with Podnapisi: #{e}"
+    end
+    begin
+      TVSubtitle.new(self)
+    rescue => e
+      log.fatal "Problem with TVSubtitle: #{e}"
+    end
+    begin  
+      SeriesSub.new(self)
+    rescue => e
+      log.fatal "Problem with SeriesSub: #{e}"
+    end
   end
   
   def growl_episode(episode, lang)
@@ -61,7 +82,7 @@ private
   end
   
   def clean_dir(dir)
-    dir.select { |e| !["..", ".", ".DS_Store", ".com.apple.timemachine.supported", "Icon\r"].include?(e) }
+    dir.select { |e| !["..", ".", ".DS_Store", ".com.apple.timemachine.supported", "Icon\r", "autosub.log", "_autosub_.log"].include?(e) }
   end
 
   def lang_name(lang)

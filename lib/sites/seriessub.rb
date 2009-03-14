@@ -17,6 +17,7 @@ class SeriesSub
         unless e.srt.include?(l) 
           $stdout.print "#{e.episode_name_with_format} [#{l}]: "
           if get_srt(e, l)
+            inspector.log.info "#{e.episode_name_with_format} [#{l}] // SeriesSub // #{@srt_name}"
             $stdout.print "FOUND\n"
             e.srt << l
             @inspector.growl_episode(e, l)
@@ -43,7 +44,8 @@ private
             tempfile.close # tempfile need to be closed for unzip it
             Zip::ZipFile.open(tempfile.path) do |zip_file|
               zip_file.each do |f|
-                if good_episode?(episode, f.name) && f.name.include?(lang_version(lang)) && episode.good_format?(f.name) && no_tag?(f.name)
+                if f.size > 5000 && good_episode?(episode, f.name) && f.name.include?(lang_version(lang)) && episode.good_format?(f.name) && no_tag?(f.name)
+                  @srt_name = f.name
                   zip_file.extract(f, episode.srt_filename(lang))
                   found = true
                 end
@@ -51,6 +53,7 @@ private
             end
           end
         elsif episode.good_format?(text) && no_tag?(text) # just a single srt file
+          @srt_name = text
           Tempfile.open("tv.srt") do |tempfile|
             tempfile.write(open(el[:href]).read) # download the zip
             tempfile.close
@@ -60,6 +63,10 @@ private
         end
       end
     end
+  rescue => e
+    @inspector.log.fatal "SeriesSub // #{episode.episode_name_with_format} [#{lang}] // #{e}"
+    found = false
+  else
     found
   end
 
